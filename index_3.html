@@ -1,0 +1,967 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Freedom Fighters | Solana Rebellion</title>
+
+  <style>
+    :root {
+      --accent: #ffb400;
+      --accent-dark: #ff7b00;
+      --bg: #0a0a0a;
+      --text: #f4f4f4;
+      --cyan: #00d4ff;
+      --magenta: #ff006e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: clip;
+      line-height: 1.4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 300%;
+      height: 300%;
+      top: -100%;
+      left: -100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255,180,0,0.25), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0,212,255,0.2), transparent 40%),
+        radial-gradient(circle at 40% 0%, rgba(255,0,110,0.15), transparent 40%);
+      animation: gradShift 10s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes gradShift {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(60px, -80px) rotate(5deg); }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(30px);
+      border-bottom: 3px solid rgba(255,180,0,0.4);
+      gap: 40px;
+      transform: perspective(1000px) rotateX(0.5deg);
+      background: linear-gradient(90deg, rgba(10,10,10,0.95), rgba(20,20,20,0.8));
+    }
+
+    .logo-text {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      transform: skewX(-15deg) skewY(3deg) rotate(-2deg);
+      animation: logoBounce 2s ease-in-out infinite;
+      text-shadow: 0 0 20px rgba(255,180,0,0.6), 3px 3px 0 rgba(0,212,255,0.4);
+    }
+
+    @keyframes logoBounce {
+      0%, 100% { transform: skewX(-15deg) skewY(3deg) rotate(-2deg) translateY(0); }
+      50% { transform: skewX(-15deg) skewY(3deg) rotate(2deg) translateY(-5px); }
+    }
+
+    .menu {
+      display: flex;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .menu a {
+      font-size: 0.85rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transition: all 0.3s ease;
+      position: relative;
+      transform: skewX(-5deg);
+    }
+
+    .menu a:hover {
+      color: var(--accent);
+      transform: skewX(-5deg) rotate(3deg) scale(1.1);
+      text-shadow: 0 0 15px rgba(255,180,0,0.8);
+    }
+
+    .hero {
+      min-height: 110vh;
+      padding: 140px 8% 80px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: visible;
+      transform: perspective(1500px) rotateY(-1deg);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border: 4px solid rgba(255,180,0,0.4);
+      border-radius: 50%;
+      top: -300px;
+      right: -200px;
+      animation: spinWild 15s linear infinite;
+      filter: blur(0px);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 3px dashed rgba(0,212,255,0.3);
+      border-radius: 50%;
+      top: 150px;
+      left: -100px;
+      animation: spinReverse 20s linear infinite;
+    }
+
+    @keyframes spinWild {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes spinReverse {
+      0% { transform: rotate(360deg) skewX(5deg); }
+      100% { transform: rotate(0deg) skewX(5deg); }
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2;
+      transform: skewY(-3deg);
+    }
+
+    .hero h1 {
+      font-size: 6.5rem;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      transform: skewY(-3deg) skewX(-2deg) rotate(-1deg);
+      animation: textGlitch 3s ease-in-out infinite;
+    }
+
+    @keyframes textGlitch {
+      0% { transform: skewY(-3deg) skewX(-2deg) rotate(-1deg) translateX(0); }
+      20% { transform: skewY(-3deg) skewX(-2deg) rotate(-1deg) translateX(3px); }
+      40% { transform: skewY(-3deg) skewX(-2deg) rotate(-1deg) translateX(-2px); }
+      60% { transform: skewY(-3deg) skewX(-2deg) rotate(-1deg) translateX(2px); }
+      80% { transform: skewY(-3deg) skewX(-2deg) rotate(-1deg) translateX(-3px); }
+      100% { transform: skewY(-3deg) skewX(-2deg) rotate(-1deg) translateX(0); }
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--magenta), var(--cyan));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      animation: gradientShift 4s ease-in-out infinite, textGlitch 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px rgba(255,180,0,0.5));
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #ccc;
+      margin-bottom: 40px;
+      max-width: 550px;
+      font-family: Arial, sans-serif;
+      transform: rotate(1deg);
+      animation: textWobble 2s ease-in-out infinite;
+    }
+
+    @keyframes textWobble {
+      0%, 100% { transform: rotate(1deg) skewX(-1deg); }
+      50% { transform: rotate(-1deg) skewX(1deg); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 20px 45px;
+      border-radius: 0;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+      transform: skewX(-10deg) rotate(1deg);
+      animation: buttonFloat 2.5s ease-in-out infinite;
+    }
+
+    @keyframes buttonFloat {
+      0%, 100% { transform: skewX(-10deg) rotate(1deg) translateY(0); }
+      50% { transform: skewX(-10deg) rotate(1deg) translateY(-8px); }
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.5), transparent 80%);
+      transform: translateX(-150%);
+      transition: transform 0.5s;
+    }
+
+    .btn:hover::before {
+      transform: translateX(150%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark), var(--magenta));
+      background-size: 200% 200%;
+      color: #000;
+      box-shadow: 0 0 40px rgba(255,180,0,0.5), inset 0 0 30px rgba(255,255,255,0.1);
+      animation: buttonFloat 2.5s ease-in-out infinite, gradientFlow 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .btn-primary:hover {
+      transform: skewX(-10deg) rotate(1deg) translate(-5px, -15px) scale(1.05);
+      box-shadow: 0 20px 60px rgba(255,180,0,0.8), inset 0 0 40px rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, transparent, rgba(0,212,255,0.1));
+      color: var(--cyan);
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 20px rgba(0,212,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: var(--cyan);
+      color: #000;
+      transform: skewX(-10deg) rotate(1deg) translate(8px, -10px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0,212,255,0.6);
+    }
+
+    .hero-right {
+      position: relative;
+      z-index: 3;
+      transform: perspective(800px) rotateY(5deg) rotateX(-2deg);
+    }
+
+    .hero-art {
+      width: 100%;
+      height: 520px;
+      background: linear-gradient(135deg, rgba(255,180,0,0.15), rgba(0,212,255,0.12), rgba(255,0,110,0.08));
+      border: 4px solid var(--accent);
+      display: grid;
+      place-items: center;
+      transform: rotate(5deg) skewX(-8deg) skewY(2deg) perspective(600px) rotateY(-3deg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(255,180,0,0.3), inset 0 0 40px rgba(0,212,255,0.15);
+      animation: artPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes artPulse {
+      0%, 100% { transform: rotate(5deg) skewX(-8deg) skewY(2deg) scale(1); }
+      50% { transform: rotate(5deg) skewX(-8deg) skewY(2deg) scale(1.02); }
+    }
+
+    .hero-art::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border: 3px dashed rgba(0,212,255,0.5);
+      animation: borderRace 2s linear infinite;
+    }
+
+    .hero-art::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 2px solid rgba(255,0,110,0.3);
+      animation: borderCounter 2.5s linear infinite reverse;
+    }
+
+    @keyframes borderRace {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(8px, 0); }
+      50% { transform: translate(8px, 8px); }
+      75% { transform: translate(0, 8px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes borderCounter {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-8px, -8px) rotate(360deg); }
+    }
+
+    .hero-art-text {
+      text-align: center;
+      z-index: 1;
+      font-size: 4.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--magenta), var(--cyan), var(--accent-dark));
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      animation: textFlash 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255,180,0,0.6));
+      text-shadow: 0 0 40px rgba(255,180,0,0.5);
+    }
+
+    @keyframes textFlash {
+      0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      50% { opacity: 0.85; transform: scale(1.05) rotate(2deg); }
+    }
+
+    section {
+      padding: 120px 8%;
+      position: relative;
+      overflow: visible;
+    }
+
+    .section-alt {
+      background: linear-gradient(180deg, rgba(255,0,110,0.08), rgba(0,212,255,0.05), transparent);
+      transform: skewY(-3deg) perspective(1200px) rotateX(0.5deg);
+      margin: 60px 0;
+    }
+
+    .section-alt > * {
+      transform: skewY(3deg);
+    }
+
+    .section-title {
+      font-size: 5.5rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(90deg, var(--accent), var(--magenta), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: skewX(-8deg) rotate(-1deg);
+      animation: titleBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes titleBounce {
+      0%, 100% { transform: skewX(-8deg) rotate(-1deg) translateY(0); }
+      50% { transform: skewX(-8deg) rotate(-1deg) translateY(-8px); }
+    }
+
+    .section-subtitle {
+      font-size: 1.15rem;
+      color: #bbb;
+      max-width: 750px;
+      margin-bottom: 70px;
+      line-height: 1.9;
+      font-family: Arial, sans-serif;
+      transform: rotate(1deg);
+    }
+
+    .grid-bold {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 35px;
+    }
+
+    .card-bold {
+      background: linear-gradient(135deg, rgba(255,180,0,0.1), rgba(0,212,255,0.08), rgba(255,0,110,0.05));
+      border: 3px solid var(--accent);
+      padding: 45px;
+      transform: rotate(-3deg) skewX(-2deg) perspective(800px) rotateY(2deg);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(255,180,0,0.2);
+      animation: cardTilt 3s ease-in-out infinite;
+    }
+
+    @keyframes cardTilt {
+      0%, 100% { transform: rotate(-3deg) skewX(-2deg) perspective(800px) rotateY(2deg); }
+      50% { transform: rotate(-3deg) skewX(-2deg) perspective(800px) rotateY(-2deg); }
+    }
+
+    .card-bold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.2), transparent);
+      opacity: 0;
+      animation: cardGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes cardGlow {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.3; }
+    }
+
+    .card-bold:hover {
+      transform: rotate(2deg) skewX(-2deg) perspective(800px) rotateY(0deg) translate(-8px, -18px) scale(1.08);
+      box-shadow: 0 30px 80px rgba(255,180,0,0.5);
+      border-color: var(--magenta);
+    }
+
+    .card-bold h3 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transform: skewX(-3deg) rotate(-1deg);
+      animation: cardTitleBounce 2.5s ease-in-out infinite;
+    }
+
+    @keyframes cardTitleBounce {
+      0%, 100% { transform: skewX(-3deg) rotate(-1deg); }
+      50% { transform: skewX(-3deg) rotate(1deg) translateY(-4px); }
+    }
+
+    .card-bold p {
+      color: #ddd;
+      line-height: 1.8;
+      font-family: Arial, sans-serif;
+      transform: rotate(0.5deg);
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 80px;
+      align-items: center;
+      transform: perspective(1200px) rotateY(-1.5deg);
+    }
+
+    .split-text h2 {
+      font-size: 4.2rem;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, var(--accent), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      letter-spacing: -1px;
+      transform: skewX(-5deg) rotate(-2deg);
+      animation: titleFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: skewX(-5deg) rotate(-2deg) translateY(0); }
+      50% { transform: skewX(-5deg) rotate(-2deg) translateY(-10px); }
+    }
+
+    .split-text p {
+      font-size: 1.1rem;
+      color: #ccc;
+      line-height: 2;
+      margin-bottom: 30px;
+      font-family: Arial, sans-serif;
+      transform: rotate(1deg);
+    }
+
+    .split-art {
+      background: linear-gradient(45deg, rgba(255,180,0,0.12), rgba(0,212,255,0.1), rgba(255,0,110,0.08));
+      border: 4px solid rgba(255,180,0,0.5);
+      min-height: 450px;
+      display: grid;
+      place-items: center;
+      transform: rotate(6deg) skewX(-6deg) skewY(3deg) perspective(1000px) rotateX(3deg);
+      position: relative;
+      box-shadow: 0 25px 75px rgba(255,180,0,0.25), inset 0 0 50px rgba(0,212,255,0.1);
+      animation: artFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes artFloat {
+      0%, 100% { transform: rotate(6deg) skewX(-6deg) skewY(3deg) perspective(1000px) rotateX(3deg) translateY(0); }
+      50% { transform: rotate(6deg) skewX(-6deg) skewY(3deg) perspective(1000px) rotateX(3deg) translateY(-15px); }
+    }
+
+    .split-art::before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border: 3px solid var(--accent);
+      animation: borderSpinMad 2s linear infinite;
+    }
+
+    .split-art::after {
+      content: '';
+      position: absolute;
+      inset: 25px;
+      border: 2px dashed var(--cyan);
+      animation: borderSpinMad 2.5s linear infinite reverse;
+    }
+
+    @keyframes borderSpinMad {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .roadmap-track {
+      position: relative;
+      padding: 100px 0;
+    }
+
+    .roadmap-track::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--accent), var(--magenta), var(--cyan), transparent);
+      animation: lineGrow 4s ease-in-out infinite;
+    }
+
+    @keyframes lineGrow {
+      0%, 100% { height: 100%; }
+      50% { height: 80%; }
+    }
+
+    .roadmap-item {
+      margin-left: 60px;
+      margin-bottom: 80px;
+      position: relative;
+      transform: skewX(-3deg);
+      animation: itemSlide 3s ease-in-out infinite;
+    }
+
+    @keyframes itemSlide {
+      0%, 100% { transform: skewX(-3deg) translateX(0); }
+      50% { transform: skewX(-3deg) translateX(8px); }
+    }
+
+    .roadmap-item::before {
+      content: '';
+      position: absolute;
+      left: -74px;
+      top: 8px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border: 4px solid var(--bg);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255,180,0,0.6);
+      animation: dotPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,180,0,0.6); }
+      50% { transform: scale(1.4); box-shadow: 0 0 40px rgba(255,180,0,0.9); }
+    }
+
+    .roadmap-item h4 {
+      font-size: 2.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+      transform: skewX(-2deg) rotate(-1deg);
+    }
+
+    .roadmap-item p {
+      color: #bbb;
+      font-size: 1.1rem;
+      line-height: 1.85;
+      font-family: Arial, sans-serif;
+      transform: rotate(0.5deg);
+    }
+
+    footer {
+      padding: 60px 8%;
+      text-align: center;
+      border-top: 3px solid rgba(255,180,0,0.5);
+      color: #999;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(255,180,0,0.05));
+      transform: none;
+      margin-top: auto;
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+      }
+
+      .hero-art-text {
+        font-size: 3rem;
+      }
+
+      .split-section {
+        grid-template-columns: 1fr;
+      }
+
+      .split-text h2 {
+        font-size: 3rem;
+      }
+
+      .section-title {
+        font-size: 3.5rem;
+      }
+
+      .logo-text {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: clip;
+      }
+
+      * {
+        max-width: 100%;
+      }
+
+      nav {
+        position: sticky;
+        top: 0;
+        flex-direction: column;
+        padding: 14px 4%;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .menu {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px 10px;
+        width: 100%;
+      }
+
+      .menu a {
+        font-size: 0.68rem;
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 110px 6% 50px;
+        gap: 28px;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .hero::before,
+      .hero::after {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+        line-height: 1.05;
+        margin-bottom: 18px;
+        transform: none;
+      }
+
+      .hero p {
+        font-size: 1rem;
+        margin-bottom: 24px;
+        transform: none;
+      }
+
+      .hero-art {
+        height: 280px;
+        transform: none;
+      }
+
+      .hero-art-text {
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+        transform: none;
+      }
+
+      .btn {
+        padding: 14px 24px;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        transform: none;
+        animation: none;
+      }
+
+      .btn:hover,
+      .btn-primary:hover,
+      .btn-secondary:hover {
+        transform: none;
+      }
+
+      .grid-bold {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      section {
+        padding: 70px 6%;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 14px;
+        transform: none;
+        max-width: 100%;
+        word-break: break-word;
+      }
+
+      .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 32px;
+        transform: none;
+      }
+
+      .card-bold {
+        padding: 24px;
+        transform: none;
+        animation: none;
+      }
+
+      .card-bold h3 {
+        font-size: 1.4rem;
+        transform: none;
+      }
+
+      .card-bold p {
+        font-size: 0.95rem;
+        transform: none;
+      }
+
+      .split-section {
+        gap: 30px;
+        transform: none;
+      }
+
+      .split-text h2 {
+        font-size: 2rem;
+        transform: none;
+      }
+
+      .split-text p {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+        transform: none;
+      }
+
+      .split-art {
+        min-height: 240px;
+        transform: none;
+      }
+
+      .roadmap-track {
+        padding: 70px 6%;
+      }
+
+      .roadmap-item {
+        margin-left: 30px;
+        margin-bottom: 40px;
+        transform: none;
+      }
+
+      .roadmap-item::before {
+        left: -38px;
+      }
+
+      .roadmap-item h4 {
+        font-size: 1.3rem;
+        transform: none;
+      }
+
+      .roadmap-item p {
+        font-size: 0.95rem;
+        transform: none;
+      }
+
+      footer {
+        padding: 40px 6%;
+        font-size: 0.8rem;
+        line-height: 1.6;
+      }
+
+      .logo-text {
+        font-size: 1.3rem;
+        letter-spacing: 4px;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo-text">$FFF</div>
+    <div class="menu">
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://pump.fun/" target="_blank">Buy</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Fight For Your<br /><span>Financial Freedom</span></h1>
+        <p>Financial Freedom Fighters is a chaotic, rule-breaking Solana rebellion. We destroy the playbook. We break the mold. We move faster, bolder, weirder than anyone else in crypto.</p>
+        <div class="hero-buttons">
+          <a href="https://pump.fun/" target="_blank" class="btn btn-primary">Buy Now</a>
+          <a href="#roadmap" class="btn btn-secondary">Roadmap</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-art">
+          <div class="hero-art-text">$FFF</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-alt">
+      <h2 class="section-title">The Rebellion</h2>
+      <p class="section-subtitle">FFF is chaotic, fragmented, and violently non-traditional. We break every rule of design. We break the rules of finance. We exist to disrupt.</p>
+      <div class="grid-bold">
+        <div class="card-bold">
+          <h3>Designed Chaos</h3>
+          <p>Aggressive skews, wild typography, glitch aesthetics. This is what breaking the rules looks like. Every pixel fights convention.</p>
+        </div>
+        <div class="card-bold">
+          <h3>Solana Speed</h3>
+          <p>Lightning-fast transactions on a chain that moves at warp speed. No delays. No compromise. Pure velocity.</p>
+        </div>
+        <div class="card-bold">
+          <h3>Community Chaos</h3>
+          <p>Holders drive the madness. No suits. No apologies. Just energy, momentum, and the relentless push for freedom.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="split-section" style="padding: 120px 8%;">
+      <div class="split-text">
+        <h2>Tokenomics That Explode</h2>
+        <p>Scarce. Volatile. Momentum-driven. FFF was designed to reward the bold and punish the timid. Early believers get the spoils.</p>
+        <p>No rug. No centralization. Just pure, chaotic market forces and a community that refuses to quit.</p>
+      </div>
+      <div class="split-art"></div>
+    </section>
+
+    <section id="ecosystem" class="section-alt">
+      <h2 class="section-title">Ecosystem</h2>
+      <p class="section-subtitle">One page doesn't build a rebellion. FFF spreads like wildfire across every channel, every platform, everywhere.</p>
+      <div class="grid-bold">
+        <div class="card-bold">
+          <h3>Social Chaos</h3>
+          <p>Telegram, Twitter, Discord—channels exploding with energy. Community-driven memes. Organic growth. Unstoppable momentum.</p>
+        </div>
+        <div class="card-bold">
+          <h3>Visual Warfare</h3>
+          <p>Skewed, rotated, chaotic assets that burn into your brain. Every piece screams rebellion. Every design breaks the mold.</p>
+        </div>
+        <div class="card-bold">
+          <h3>On-Chain Dominance</h3>
+          <p>Staking wars. Governance chaos. Utility drops that matter. FFF holders stay active, stay rewarded, stay in control.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="roadmap-track" style="padding: 120px 8%;">
+      <h2 class="section-title">Campaign</h2>
+      <p class="section-subtitle">Launch. Scale. Dominate. Repeat.</p>
+      
+      <div class="roadmap-item">
+        <h4>Phase 1: Launch Blast</h4>
+        <p>Deployment, liquidity, and aggressive community seeding. We launch and immediately capture attention.</p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4>Phase 2: Viral Takeover</h4>
+        <p>Memes, trends, moments that spread like wildfire. FFF becomes impossible to ignore across every social platform.</p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4>Phase 3: Utility Explosion</h4>
+        <p>Staking mechanics, merch, partnerships. FFF becomes more than a token—it becomes a movement with real utility.</p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4>Phase 4: Total Domination</h4>
+        <p>FFF is the symbol of rebellion in crypto. Recognized. Respected. Feared. Financial freedom realized.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Financial Freedom Fighters — Solana's Wildest Rebellion
+  </footer>
+</body>
+</html>
