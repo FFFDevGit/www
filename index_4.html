@@ -518,6 +518,190 @@
       display: block;
     }
 
+    /* ARSENAL */
+    .arsenal {
+      padding: 100px 8%;
+    }
+
+    .arsenal .arsenal-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      align-items: center;
+      gap: 36px;
+      margin-top: 26px;
+    }
+
+    .arsenal .pie-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .arsenal .pie-svg {
+      width: min(52vw, 580px);
+      height: auto;
+      position: relative;
+      display: block;
+      filter: drop-shadow(0 0 28px rgba(0, 224, 167, 0.12));
+    }
+
+    .arsenal .pie-svg svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 1/1;
+      overflow: visible;
+    }
+
+    .arsenal .pie-svg .bg {
+      fill: rgba(255,255,255,0.02);
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 1;
+    }
+
+    .arsenal .pie-svg path {
+      stroke: rgba(255,255,255,0.14);
+      stroke-width: 1.25;
+      transition: transform 0.5s ease, opacity 0.5s ease, filter 0.2s ease;
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+
+    .arsenal .pie-svg path.slice {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    .arsenal .pie-svg path.slice.visible {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .arsenal .pie-svg path.slice:hover,
+    .arsenal .pie-svg path.slice:focus,
+    .arsenal .pie-svg path.slice:focus-visible,
+    .arsenal .pie-svg path.slice.active {
+      filter: brightness(1.04) saturate(1.12);
+      stroke: rgba(255,255,255,0.4);
+      stroke-width: 1.5;
+    }
+
+    .arsenal-tooltip {
+      position: fixed;
+      z-index: 2000;
+      background: rgba(19, 17, 14, 0.96);
+      color: #f7f3ee;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+      pointer-events: none;
+      transform: translate(-50%, -120%);
+      white-space: nowrap;
+      border: 1px solid rgba(0, 224, 167, 0.4);
+    }
+
+    .arsenal-tooltip small {
+      display: block;
+      font-weight: 600;
+      color: #d9d1c8;
+      font-size: 0.9rem;
+    }
+
+    .arsenal .pie-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(30vw, 220px);
+      height: min(30vw, 220px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(0,224,167,0.18), rgba(12,12,12,0.98));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #d9d1c8;
+      border: 4px solid rgba(0,224,167,0.18);
+      z-index: 4;
+      box-shadow: inset 0 0 24px rgba(0,224,167,0.08), 0 12px 28px rgba(0,0,0,0.18);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .arsenal .pie-center strong {
+      display: block;
+      color: #f4b400;
+      font-size: clamp(1.1rem, 2vw, 1.8rem);
+      margin-bottom: 2px;
+    }
+
+    .arsenal .pie-center small {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: #cfc4b9;
+    }
+
+    .arsenal .legend {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .arsenal .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      background: linear-gradient(135deg, rgba(79, 69, 55, 0.78), rgba(18, 15, 12, 0.96));
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(181, 170, 153, 0.22);
+      color: #f7f3ee;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    .arsenal .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .arsenal .legend-left strong {
+      font-weight: 700;
+      color: #f7f3ee;
+    }
+
+    .arsenal .legend-val {
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .arsenal .legend-item.c1 .legend-val { color: #f4b400; }
+    .arsenal .legend-item.c2 .legend-val { color: #00e0a7; }
+    .arsenal .legend-item.c3 .legend-val { color: #ff7b7b; }
+    .arsenal .legend-item.c4 .legend-val { color: #6fd1a9; }
+    .arsenal .legend-item.c5 .legend-val { color: #7c8cff; }
+    .arsenal .legend-item.c6 .legend-val { color: #b5aa99; }
+
+    .arsenal .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: inline-block;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+    }
+
+    .arsenal .sw-1 { background: #f4b400; }
+    .arsenal .sw-2 { background: #00e0a7; }
+    .arsenal .sw-3 { background: #ff7b7b; }
+    .arsenal .sw-4 { background: #6fd1a9; }
+    .arsenal .sw-5 { background: #7c8cff; }
+    .arsenal .sw-6 { background: #b5aa99; }
+
     /* ROADMAP */
     .roadmap {
       position: relative;
@@ -679,6 +863,12 @@
         left: 24px;
         transform: translateX(0);
       }
+    }
+
+    @media(max-width:900px) {
+      .arsenal .arsenal-grid { grid-template-columns: 1fr; gap: 18px; }
+      .arsenal .pie-svg { width: 240px; height: 240px; }
+      .arsenal .pie-center { width: 110px; height: 110px; }
     }
 
     footer {
@@ -859,7 +1049,7 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo-wrap">
-      <img src="logo.png" alt="FFF Logo">
+      <img src="logo_2.png" alt="FFF Logo">
       <div class="logo-title">$FFF</div>
     </div>
 
@@ -957,6 +1147,45 @@
       </div>
     </div>
   </section>
+
+  <!-- ARSENAL -->
+  <section id="arsenal" class="arsenal">
+    <h2 class="section-title">Our Arsenal</h2>
+    <p class="section-sub">Every weapon has a purpose.</p>
+
+    <div class="arsenal-grid">
+      <div class="pie-wrap">
+        <div class="pie-svg">
+          <svg id="arsenal-pie" viewBox="0 0 360 360" role="img" aria-label="Token allocation pie chart">
+            <defs>
+              <filter id="glow-1" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="b" />
+                <feMerge><feMergeNode in="b" /></feMerge>
+              </filter>
+            </defs>
+            <circle class="bg" cx="180" cy="180" r="170"></circle>
+            <g id="arsenal-slices"></g>
+          </svg>
+        </div>
+
+        <div class="pie-center">
+          <strong>Allocation</strong>
+          <small>Token Distribution</small>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item c1"><div class="legend-left"><span class="swatch sw-1"></span><strong>Liquidity</strong></div><div class="legend-val">40%</div></div>
+        <div class="legend-item c2"><div class="legend-left"><span class="swatch sw-2"></span><strong>Community Rewards</strong></div><div class="legend-val">25%</div></div>
+        <div class="legend-item c3"><div class="legend-left"><span class="swatch sw-3"></span><strong>Marketing</strong></div><div class="legend-val">15%</div></div>
+        <div class="legend-item c4"><div class="legend-left"><span class="swatch sw-4"></span><strong>Development</strong></div><div class="legend-val">10%</div></div>
+        <div class="legend-item c5"><div class="legend-left"><span class="swatch sw-5"></span><strong>Treasury</strong></div><div class="legend-val">5%</div></div>
+        <div class="legend-item c6"><div class="legend-left"><span class="swatch sw-6"></span><strong>Team (Locked)</strong></div><div class="legend-val">5%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="arsenal-tooltip" class="arsenal-tooltip" style="display:none;" aria-hidden="true"><strong></strong><small></small></div>
 
   <!-- DEX -->
   <section id="dex">
@@ -1119,6 +1348,114 @@
         backToTopButton.classList.remove('show');
       }
     });
+
+    (function(){
+      const svg = document.getElementById('arsenal-pie');
+      const tooltip = document.getElementById('arsenal-tooltip');
+      if (!svg || !tooltip) return;
+
+      const sliceData = [
+        { label: 'Liquidity', value: 40, color: '#f4b400', glow: 'url(#glow-1)' },
+        { label: 'Community Rewards', value: 25, color: '#00e0a7', glow: 'url(#glow-2)' },
+        { label: 'Marketing', value: 15, color: '#ff7b7b', glow: 'url(#glow-3)' },
+        { label: 'Development', value: 10, color: '#6fd1a9', glow: 'url(#glow-4)' },
+        { label: 'Treasury', value: 5, color: '#7c8cff', glow: 'url(#glow-5)' },
+        { label: 'Team (Locked)', value: 5, color: '#b5aa99', glow: 'url(#glow-6)' }
+      ];
+
+      const group = document.getElementById('arsenal-slices');
+      const cx = 180;
+      const cy = 180;
+      const outerR = 148;
+      const innerR = 104;
+      let start = -Math.PI / 2;
+
+      sliceData.forEach((slice, index) => {
+        const angle = (slice.value / 100) * Math.PI * 2;
+        const end = start + angle;
+
+        const outerStartX = cx + outerR * Math.cos(start);
+        const outerStartY = cy + outerR * Math.sin(start);
+        const outerEndX = cx + outerR * Math.cos(end);
+        const outerEndY = cy + outerR * Math.sin(end);
+
+        const innerStartX = cx + innerR * Math.cos(end);
+        const innerStartY = cy + innerR * Math.sin(end);
+        const innerEndX = cx + innerR * Math.cos(start);
+        const innerEndY = cy + innerR * Math.sin(start);
+
+        const largeArc = angle > Math.PI ? 1 : 0;
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('class', 'slice c' + (index + 1));
+        path.setAttribute('data-label', slice.label);
+        path.setAttribute('data-value', slice.value + '%');
+        path.setAttribute('tabindex', '0');
+        path.setAttribute('role', 'button');
+        path.setAttribute('fill', slice.color);
+        path.setAttribute('d', `M ${outerStartX.toFixed(2)} ${outerStartY.toFixed(2)} A ${outerR} ${outerR} 0 ${largeArc} 1 ${outerEndX.toFixed(2)} ${outerEndY.toFixed(2)} L ${innerStartX.toFixed(2)} ${innerStartY.toFixed(2)} A ${innerR} ${innerR} 0 ${largeArc} 0 ${innerEndX.toFixed(2)} ${innerEndY.toFixed(2)} Z`);
+        path.setAttribute('aria-label', `${slice.label} ${slice.value}%`);
+        group.appendChild(path);
+        start = end;
+      });
+
+      // The donut is intentionally left open at the center so the overlay label can sit cleanly inside.
+
+      const slices = Array.from(document.querySelectorAll('#arsenal .pie-svg path.slice'));
+
+      function showTooltipForEvent(p, e){
+        p.parentNode.appendChild(p);
+        const label = p.getAttribute('data-label') || '';
+        const value = p.getAttribute('data-value') || '';
+        tooltip.querySelector('strong').textContent = label;
+        tooltip.querySelector('small').textContent = value;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX) + 'px';
+        tooltip.style.top = (e.clientY - 12) + 'px';
+        tooltip.setAttribute('aria-hidden','false');
+        const rBox = tooltip.getBoundingClientRect();
+        let left = e.clientX;
+        let top = e.clientY - 12;
+        if (rBox.right > window.innerWidth - 8) left -= (rBox.right - (window.innerWidth - 8));
+        if (rBox.left < 8) left += (8 - rBox.left);
+        if (rBox.top < 8) top = e.clientY + 18;
+        if (top + rBox.height > window.innerHeight - 8) top = window.innerHeight - rBox.height - 8;
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      }
+
+      slices.forEach((p,i)=>{
+        setTimeout(()=> p.classList.add('visible'), i * 120);
+
+        p.addEventListener('mouseenter', (e)=>{ p.classList.add('active'); showTooltipForEvent(p,e); });
+        p.addEventListener('mousemove', (e)=> showTooltipForEvent(p,e));
+        p.addEventListener('mouseleave', ()=>{
+          p.classList.remove('active');
+          tooltip.style.display = 'none';
+          tooltip.setAttribute('aria-hidden','true');
+        });
+
+        p.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            p.classList.add('active');
+            const bbox = p.getBoundingClientRect();
+            showTooltipForEvent(p, {clientX: bbox.left + bbox.width/2, clientY: bbox.top + bbox.height/2});
+            setTimeout(()=>{ p.classList.remove('active'); tooltip.style.display='none'; tooltip.setAttribute('aria-hidden','true'); }, 1400);
+          }
+        });
+
+        p.addEventListener('touchstart', (e)=>{
+          const touch = e.touches[0];
+          p.classList.add('active');
+          showTooltipForEvent(p, {clientX: touch.clientX, clientY: touch.clientY});
+          const clear = ()=>{ p.classList.remove('active'); tooltip.style.display='none'; tooltip.setAttribute('aria-hidden','true'); };
+          const tEnd = ()=> { clear(); window.removeEventListener('touchend', tEnd); window.removeEventListener('touchcancel', tEnd); };
+          window.addEventListener('touchend', tEnd, {passive:true});
+          window.addEventListener('touchcancel', tEnd, {passive:true});
+          setTimeout(clear, 1800);
+        }, {passive:true});
+      });
+    })();
 
     document.addEventListener('click', async (event) => {
       const trigger = event.target.closest('.contract-copy');
