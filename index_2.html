@@ -13,6 +13,91 @@
       scroll-behavior: smooth;
     }
 
+
+    /* ARSENAL / PIE SVG STYLES - MATCH OTHER SECTIONS */
+    .arsenal { padding: 100px 8%; }
+
+    .arsenal .arsenal-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) 360px;
+      gap: 32px;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0;
+      margin: 18px auto 0;
+    }
+
+    .arsenal .pie-wrap { display:flex; justify-content:center; align-items:center; position:relative; }
+
+    .arsenal .pie-svg { width: min(55vw, 640px); height: auto; position: relative; display: block; }
+    .arsenal .pie-svg svg { width: 100%; height: auto; display: block; aspect-ratio: 1/1; }
+    .arsenal .pie-svg .bg { stroke: rgba(255,255,255,0.03); stroke-width: 20; fill: none; }
+    .arsenal .pie-svg path { stroke: none; }
+
+    /* slice animation + hover (cross-browser & mobile-friendly) */
+    .arsenal .pie-svg path.slice {
+      transform-box: fill-box; -webkit-transform-box: fill-box;
+      transform-origin: 50% 50%; -webkit-transform-origin: 50% 50%;
+      transform: scale(0.01);
+      opacity: 0;
+      stroke-linejoin: round;
+      will-change: transform, filter, opacity;
+      transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease, filter 220ms ease;
+      stroke-width: 0;
+    }
+    .arsenal .pie-svg path.slice.visible { transform: scale(1); opacity: 1; }
+
+    /* hover / active states (work for mouse, keyboard and touch) */
+    .arsenal .pie-svg path.slice:hover,
+    .arsenal .pie-svg path.slice:focus,
+    .arsenal .pie-svg path.slice:focus-visible,
+    .arsenal .pie-svg path.slice.active {
+      transform: scale(1.08);
+      cursor: pointer;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.45));
+    }
+    /* keep the existing neon stroke-on-hover behaviour per color */
+
+    /* neon border per slice on hover - use SVG filters for consistent glow */
+    .arsenal .pie-svg path.slice.c1:hover { stroke: #f4b400; stroke-width: 8; filter: url(#glow-1); }
+    .arsenal .pie-svg path.slice.c2:hover { stroke: #ffb86b; stroke-width: 8; filter: url(#glow-2); }
+    .arsenal .pie-svg path.slice.c3:hover { stroke: #ff7b7b; stroke-width: 8; filter: url(#glow-3); }
+    .arsenal .pie-svg path.slice.c4:hover { stroke: #6fd1a9; stroke-width: 8; filter: url(#glow-4); }
+    .arsenal .pie-svg path.slice.c5:hover { stroke: #7c8cff; stroke-width: 8; filter: url(#glow-5); }
+    .arsenal .pie-svg path.slice.c6:hover { stroke: #6b6b6b; stroke-width: 8; filter: url(#glow-6); }
+
+    /* tooltip */
+    .arsenal-tooltip { position: fixed; z-index: 2000; background: #070707; color: #fff; padding: 8px 10px; border-radius: 8px; font-weight:700; box-shadow: 0 6px 20px rgba(0,0,0,0.6); pointer-events:none; transform: translate(-50%, -120%); white-space: nowrap; border:1px solid rgba(255,255,255,0.04); }
+    .arsenal-tooltip small { display:block; font-weight:600; color:#d1d1d1; font-size:0.9rem; }
+
+    .arsenal .pie-center { position: absolute; width: min(30vw,220px); height: min(30vw,220px); border-radius: 50%; background: #070707; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#d1d1d1; border:4px solid rgba(255,255,255,0.03); z-index:2; }
+
+    .arsenal .legend { display:flex; flex-direction:column; gap:10px; }
+    .arsenal .legend-item { display:flex; align-items:center; gap:12px; justify-content:space-between; background: rgba(255,255,255,0.02); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); color:#d1d1d1; }
+    .arsenal .legend-left { display:flex; align-items:center; gap:12px; }
+    .arsenal .legend-val { font-weight:800; }
+    .arsenal .legend-item.c1 .legend-val { color: #f4b400; }
+    .arsenal .legend-item.c2 .legend-val { color: #ffb86b; }
+    .arsenal .legend-item.c3 .legend-val { color: #ff7b7b; }
+    .arsenal .legend-item.c4 .legend-val { color: #6fd1a9; }
+    .arsenal .legend-item.c5 .legend-val { color: #7c8cff; }
+    .arsenal .legend-item.c6 .legend-val { color: #6b6b6b; }
+    .arsenal .swatch { width:18px; height:18px; border-radius:4px; display:inline-block; }
+    .arsenal .sw-1 { background:#f4b400 }
+    .arsenal .sw-2 { background:#ffb86b }
+    .arsenal .sw-3 { background:#ff7b7b }
+    .arsenal .sw-4 { background:#6fd1a9 }
+    .arsenal .sw-5 { background:#7c8cff }
+    .arsenal .sw-6 { background:#6b6b6b }
+
+    @media(max-width:900px) {
+      .arsenal { padding: 72px 4%; }
+      .arsenal .arsenal-grid { grid-template-columns: 1fr; gap: 18px; padding: 0; }
+      .arsenal .pie-svg { width: 80vw; }
+      .arsenal .pie-center { width: 36vw; height: 36vw; }
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
       background: #050505;
@@ -570,6 +655,12 @@
         font-size: 0.85rem;
       }
     }
+
+    @media(max-width:900px) {
+      .arsenal .arsenal-grid { grid-template-columns: 1fr; gap: 18px; }
+      .arsenal .pie-svg { width: 240px; height: 240px; }
+      .arsenal .pie-center { width: 110px; height: 110px; }
+    }
   </style>
 </head>
 
@@ -578,7 +669,7 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo-wrap">
-      <img src="logo.png" alt="FFF Logo">
+      <img src="logo_2.png" alt="FFF Logo">
       <div class="logo-title">$FFF</div>
     </div>
 
@@ -618,7 +709,7 @@
       </div>
 
       <div class="hero-image">
-        <img src="logo.png" alt="Financial Freedom Fighters">
+        <img src="logo_2.png" alt="Financial Freedom Fighters">
       </div>
 
     </div>
@@ -664,6 +755,106 @@
     </div>
   </section>
 
+  <!-- ARSENAL -->
+  <section id="arsenal" class="arsenal">
+    <h2 class="section-title">Our Arsenal</h2>
+    <p class="section-sub">Every weapon has a purpose.</p>
+
+    <div class="arsenal-grid">
+      <div class="pie-wrap">
+        <div class="pie-svg" aria-hidden="true">
+            <svg viewBox="0 0 360 360" role="img" aria-label="Arsenal allocation pie">
+              <defs>
+                <!-- Firefox-friendly glow: blur the SourceAlpha, flood with color, composite, then merge with graphic -->
+                <filter id="glow-1" x="-60%" y="-60%" width="220%" height="220%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur" />
+                  <feFlood flood-color="#f4b400" flood-opacity="0.95" result="color" />
+                  <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <filter id="glow-2" x="-60%" y="-60%" width="220%" height="220%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur" />
+                  <feFlood flood-color="#ffb86b" flood-opacity="0.9" result="color" />
+                  <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <filter id="glow-3" x="-60%" y="-60%" width="220%" height="220%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur" />
+                  <feFlood flood-color="#ff7b7b" flood-opacity="0.9" result="color" />
+                  <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <filter id="glow-4" x="-60%" y="-60%" width="220%" height="220%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
+                  <feFlood flood-color="#6fd1a9" flood-opacity="0.95" result="color" />
+                  <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <filter id="glow-5" x="-60%" y="-60%" width="220%" height="220%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
+                  <feFlood flood-color="#7c8cff" flood-opacity="0.95" result="color" />
+                  <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <filter id="glow-6" x="-60%" y="-60%" width="220%" height="220%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
+                  <feFlood flood-color="#6b6b6b" flood-opacity="0.9" result="color" />
+                  <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle class="bg" cx="180" cy="180" r="140"></circle>
+              <!-- circumference = 2πr -> ~879.645 (r=140) -->
+              <!-- slices drawn as strokes on concentric circle using stroke-dasharray -->
+              <g transform="rotate(-90 180 180)">
+                <path class="slice c1" data-label="Liquidity" data-value="40%" aria-label="Liquidity 40%" tabindex="0" role="button" fill="#f4b400" d="M180 180 L180 40 A140 140 0 0 1 262.29 293.26 Z"></path>
+                <path class="slice c2" data-label="Community Rewards" data-value="25%" aria-label="Community Rewards 25%" tabindex="0" role="button" fill="#ffb86b" d="M180 180 L262.29 293.26 A140 140 0 0 1 66.74 262.29 Z"></path>
+                <path class="slice c3" data-label="Marketing" data-value="15%" aria-label="Marketing 15%" tabindex="0" role="button" fill="#ff7b7b" d="M180 180 L66.74 262.29 A140 140 0 0 1 46.85 136.74 Z"></path>
+                <path class="slice c4" data-label="Development" data-value="10%" aria-label="Development 10%" tabindex="0" role="button" fill="#6fd1a9" d="M180 180 L46.85 136.74 A140 140 0 0 1 97.71 66.74 Z"></path>
+                <path class="slice c5" data-label="Treasury" data-value="5%" aria-label="Treasury 5%" tabindex="0" role="button" fill="#7c8cff" d="M180 180 L97.71 66.74 A140 140 0 0 1 136.74 46.85 Z"></path>
+                <path class="slice c6" data-label="Team (Locked)" data-value="5%" aria-label="Team (Locked) 5%" tabindex="0" role="button" fill="#6b6b6b" d="M180 180 L136.74 46.85 A140 140 0 0 1 180 40 Z"></path>
+              </g>
+            </svg>
+          </div>
+        <div class="pie-center"><strong>100%</strong><small>Allocation</small></div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item c1"><div class="legend-left"><span class="swatch sw-1"></span><strong>Liquidity</strong></div><div class="legend-val">40%</div></div>
+        <div class="legend-item c2"><div class="legend-left"><span class="swatch sw-2"></span><strong>Community Rewards</strong></div><div class="legend-val">25%</div></div>
+        <div class="legend-item c3"><div class="legend-left"><span class="swatch sw-3"></span><strong>Marketing</strong></div><div class="legend-val">15%</div></div>
+        <div class="legend-item c4"><div class="legend-left"><span class="swatch sw-4"></span><strong>Development</strong></div><div class="legend-val">10%</div></div>
+        <div class="legend-item c5"><div class="legend-left"><span class="swatch sw-5"></span><strong>Treasury</strong></div><div class="legend-val">5%</div></div>
+        <div class="legend-item c6"><div class="legend-left"><span class="swatch sw-6"></span><strong>Team (Locked)</strong></div><div class="legend-val">5%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="arsenal-tooltip" class="arsenal-tooltip" style="display:none;" aria-hidden="true"><strong></strong><small></small></div>
+
   <!-- DEX -->
   <section id="dex">
     <h2 class="section-title">Dex Screener</h2>
@@ -675,7 +866,6 @@
       </iframe>
     </div>
   </section>
-
   <!-- ROADMAP -->
   <section id="roadmap">
     <h2 class="section-title">Roadmap</h2>
@@ -825,6 +1015,79 @@
         backToTopButton.classList.remove('show');
       }
     });
+    
+    // Arsenal pie: slice animations + tooltip
+    (function(){
+      const slices = Array.from(document.querySelectorAll('#arsenal .pie-svg path.slice'));
+      const tooltip = document.getElementById('arsenal-tooltip');
+
+      // entrance animation (staggered) and tooltip positioning with clamping
+      function showTooltipForEvent(p, e){
+        p.parentNode.appendChild(p);
+        const label = p.getAttribute('data-label') || '';
+        const value = p.getAttribute('data-value') || '';
+        tooltip.querySelector('strong').textContent = label;
+        tooltip.querySelector('small').textContent = value;
+        tooltip.style.display = 'block';
+        // initial placement
+        tooltip.style.left = (e.clientX) + 'px';
+        tooltip.style.top = (e.clientY - 12) + 'px';
+        tooltip.setAttribute('aria-hidden','false');
+        // clamp inside viewport after measuring
+        const r = tooltip.getBoundingClientRect();
+        let left = e.clientX;
+        let top = e.clientY - 12;
+        if (r.right > window.innerWidth - 8) left -= (r.right - (window.innerWidth - 8));
+        if (r.left < 8) left += (8 - r.left);
+        if (r.top < 8) top = e.clientY + 18; // place below cursor if above would overflow
+        if (top + r.height > window.innerHeight - 8) top = window.innerHeight - r.height - 8;
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      }
+
+      slices.forEach((p,i)=>{
+        // staggered entrance
+        setTimeout(()=> p.classList.add('visible'), i * 120);
+
+        // ensure path is keyboard-focusable (redundant if set in markup)
+        try { p.setAttribute('tabindex', p.getAttribute('tabindex') || '0'); } catch(e){}
+
+        // mouse interactions
+        p.addEventListener('mouseenter', (e)=>{ p.classList.add('active'); showTooltipForEvent(p,e); });
+        p.addEventListener('mousemove', (e)=> showTooltipForEvent(p,e));
+        p.addEventListener('mouseleave', ()=>{
+          p.classList.remove('active');
+          tooltip.style.display = 'none';
+          tooltip.setAttribute('aria-hidden','true');
+        });
+
+        // keyboard accessibility: Enter / Space to trigger
+        p.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            p.classList.add('active');
+            // approximate center of element for tooltip
+            const bbox = p.getBoundingClientRect();
+            showTooltipForEvent(p, {clientX: bbox.left + bbox.width/2, clientY: bbox.top + bbox.height/2});
+            setTimeout(()=>{ p.classList.remove('active'); tooltip.style.display='none'; tooltip.setAttribute('aria-hidden','true'); }, 1400);
+          }
+        });
+
+        // touch support: add active class and show tooltip briefly
+        p.addEventListener('touchstart', (e)=>{
+          const touch = e.touches[0];
+          p.classList.add('active');
+          showTooltipForEvent(p, {clientX: touch.clientX, clientY: touch.clientY});
+          // remove active state when touch ends or after timeout
+          const clear = ()=>{ p.classList.remove('active'); tooltip.style.display='none'; tooltip.setAttribute('aria-hidden','true'); };
+          const tEnd = ()=> { clear(); window.removeEventListener('touchend', tEnd); window.removeEventListener('touchcancel', tEnd); };
+          window.addEventListener('touchend', tEnd, {passive:true});
+          window.addEventListener('touchcancel', tEnd, {passive:true});
+          setTimeout(clear, 1800);
+        }, {passive:true});
+
+      });
+    })();
   </script>
 
 </body>
